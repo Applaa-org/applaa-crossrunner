@@ -3,8 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crossrunner - Preview</title>
+    <title>Crossrunner - Premium Edition</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
             margin: 0;
             padding: 0;
@@ -12,90 +18,216 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background: #1a1a1a;
-            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #0a1f0f 0%, #1a3a2a 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+        
         #gameContainer {
             position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            overflow: hidden;
         }
+        
         canvas {
-            border: 2px solid #333;
             display: block;
+            background: #1a2e1a;
         }
+        
         #startOverlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 10;
+            animation: fadeIn 0.5s ease-out;
         }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
         #startPanel {
-            background: #2a2a2a;
-            padding: 40px;
-            border-radius: 10px;
+            background: linear-gradient(145deg, #2a2a2a 0%, #1a1a1a 100%);
+            padding: 50px;
+            border-radius: 20px;
             text-align: center;
             border: 3px solid #ffcc00;
+            box-```html
+shadow: 0 10px 40px rgba(255, 204, 0, 0.3);
+            animation: slideUp 0.6s ease-out;
+            max-width: 600px;
         }
+        
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
         h1 {
             color: #ffcc00;
-            margin: 0 0 20px 0;
-            font-size: 48px;
+            margin: 0 0 10px 0;
+            font-size: 56px;
+            font-weight: bold;
+            text-shadow: 3px 3px 6px rgba(255, 153, 0, 0.5);
+            letter-spacing: 2px;
         }
+        
+        #subtitle {
+            color: #cccccc;
+            font-size: 16px;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+        
         #instructions {
             color: #fff;
-            margin: 20px 0;
-            line-height: 1.8;
+            margin: 25px 0;
+            line-height: 2;
             font-size: 18px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 4px solid #ffcc00;
         }
+        
         button {
-            background: #ffcc00;
+            background: linear-gradient(135deg, #ffcc00 0%, #ffaa00 100%);
             border: none;
-            padding: 15px 40px;
+            padding: 18px 50px;
             font-size: 24px;
             font-weight: bold;
             cursor: pointer;
-            margin: 10px;
-            border-radius: 5px;
+            margin: 12px;
+            border-radius: 50px;
+            color: #1a1a1a;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 204, 0, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
+        
         button:hover {
-            background: #ffaa00;
+            background: linear-gradient(135deg, #ffdd00 0%, #ffbb00 100%);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(255, 204, 0, 0.6);
         }
-        #score {
-            position: absolute;
-            top: 10px;
-            left: 10px;
+        
+        button:active {
+            transform: translateY(-1px) scale(1.02);
+        }
+        
+        #closeBtn {
+            background: linear-gradient(135deg, #666 0%, #444 100%);
             color: white;
-            font-size: 24px;
-            font-weight: bold;
-            z-index: 5;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            font-size: 20px;
+            padding: 15px 40px;
         }
+        
+        #closeBtn:hover {
+            background: linear-gradient(135deg, #777 0%, #555 100%);
+        }
+        
+        #uiPanel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            z-index: 5;
+            pointer-events: none;
+        }
+        
+        .stat-panel {
+            background: linear-gradient(135deg, rgba(42, 42, 42, 0.95) 0%, rgba(26, 26, 26, 0.95) 100%);
+            backdrop-filter: blur(10px);
+            padding: 15px 25px;
+            border-radius: 15px;
+            border: 2px solid rgba(255, 204, 0, 0.3);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            min-width: 180px;
+        }
+        
+        .stat-title {
+            color: #999;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+        
+        .stat-value {
+            color: #ffcc00;
+            font-size: 32px;
+            font-weight: bold;
+            text-shadow: 0 2px 4px rgba(255, 204, 0, 0.5);
+        }
+        
+        #progressValue {
+            color: #4da6ff;
+        }
+        
         .hidden {
             display: none !important;
+        }
+        
+        .emoji {
+            display: inline-block;
+            margin: 0 5px;
+        }
+        
+        hr {
+            border: none;
+            border-top: 2px solid rgba(255, 204, 0, 0.3);
+            margin: 25px 0;
         }
     </style>
 </head>
 <body>
     <div id="gameContainer">
         <canvas id="gameCanvas" width="800" height="600"></canvas>
-        <div id="score">Score: 0</div>
+        
+        <div id="uiPanel">
+            <div class="stat-panel">
+                <div class="stat-title">Score</div>
+                <div class="stat-value" id="scoreValue">0</div>
+            </div>
+            <div class="stat-panel">
+                <div class="stat-title">Progress</div>
+                <div class="stat-value" id="progressValue">0%</div>
+            </div>
+        </div>
+        
         <div id="startOverlay">
             <div id="startPanel">
                 <h1>CROSSRUNNER</h1>
+                <div id="subtitle">The Ultimate Traffic Dodging Challenge</div>
+                <hr>
                 <div id="instructions">
-                    Use W/A/S/D to move<br><br>
-                    Cross 17 roads filled with FAST traffic!<br>
-                    Collect sparse coins for extra points (risky!)<br>
-                    Reach the green goal zone at the top<br><br>
-                    Don't get hit!
+                    <span class="emoji">🎮</span> Use <strong>W/A/S/D</strong> to move<br><br>
+                    <span class="emoji">🚗</span> Cross <strong>17 roads</strong> filled with FAST traffic!<br>
+                    <span class="emoji">💰</span> Collect sparse coins for extra points (risky!)<br>
+                    <span class="emoji">🎯</span> Reach the green goal zone at the top<br><br>
+                    <span class="emoji">⚠️</span> <strong>Don't get hit!</strong>
                 </div>
-                <button id="startBtn">START GAME</button><br>
-                <button id="closeBtn">CLOSE</button>
+                <hr>
+                <button id="startBtn"><span class="emoji">▶</span> START GAME</button><br>
+                <button id="closeBtn"><span class="emoji">✕</span> Close</button>
             </div>
         </div>
     </div>
@@ -106,11 +238,15 @@
         const startOverlay = document.getElementById('startOverlay');
         const startBtn = document.getElementById('startBtn');
         const closeBtn = document.getElementById('closeBtn');
-        const scoreEl = document.getElementById('score');
+        const scoreValue = document.getElementById('scoreValue');
+        const progressValue = document.getElementById('progressValue');
 
         let gameStarted = false;
         let gameOver = false;
         let score = 0;
+
+        const TOTAL_DISTANCE = 2550.0;
+        const START_POSITION = 650.0;
 
         // Camera
         let cameraY = 0;
@@ -125,7 +261,7 @@
             color: '#33cc55'
         };
 
-        // Roads (17 roads, positioned from bottom to top)
+        // Roads (17 roads)
         const roads = [];
         for (let i = 0; i < 17; i++) {
             roads.push({
@@ -137,28 +273,29 @@
         // Goal
         const goal = {
             y: -1900,
-            height: 100
+            height: 100,
+            pulseTime: 0
         };
 
         // Vehicles
         const vehicles = [];
         const vehicleSpawnTimer = {};
 
-        // Initialize spawn timers for each road
+        // Initialize spawn timers
         for (let i = 0; i < 17; i++) {
             vehicleSpawnTimer[i] = Math.random() * 800;
         }
 
-        // Coins (sparse, risky placement)
+        // Coins (sparse placement)
         const coins = [
-            { x: 600, y: 400, collected: false },
-            { x: 200, y: 120, collected: false },
-            { x: 500, y: -160, collected: false },
-            { x: 300, y: -440, collected: false },
-            { x: 650, y: -720, collected: false },
-            { x: 150, y: -1000, collected: false },
-            { x: 700, y: -1280, collected: false },
-            { x: 400, y: -1560, collected: false }
+            { x: 600, y: 400, collected: false, pulseTime: 0 },
+            { x: 200, y: 120, collected: false, pulseTime: Math.PI / 3 },
+            { x: 500, y: -160, collected: false, pulseTime: Math.PI * 2 / 3 },
+            { x: 300, y: -440, collected: false, pulseTime: Math.PI },
+            { x: 650, y: -720, collected: false, pulseTime: Math.PI * 4 / 3 },
+            { x: 150, y: -1000, collected: false, pulseTime: Math.PI * 5 / 3 },
+            { x: 700, y: -1280, collected: false, pulseTime: Math.PI / 2 },
+            { x: 400, y: -1560, collected: false, pulseTime: Math.PI * 3 / 2 }
         ];
 
         // Input
@@ -184,8 +321,9 @@
         function spawnVehicle(roadIndex) {
             const roadY = 540 - (roadIndex * 140);
             const direction = Math.random() > 0.5 ? 1 : -1;
-            const speed = 350 + Math.random() * 200; // Fast!
+            const speed = 350 + Math.random() * 200;
             
+            const hue = Math.random() * 60;
             vehicles.push({
                 x: direction > 0 ? -80 : 880,
                 y: roadY,
@@ -193,29 +331,26 @@
                 height: 40,
                 speed: speed,
                 direction: direction,
-                color: `hsl(${Math.random() * 60}, 70%, 50%)`
+                color: `hsl(${hue}, 70%, 50%)`
             });
         }
 
         function updateVehicles(deltaTime) {
-            // Update existing vehicles
             for (let i = vehicles.length - 1; i >= 0; i--) {
                 const vehicle = vehicles[i];
                 vehicle.x += vehicle.speed * vehicle.direction * deltaTime;
                 
-                // Remove off-screen vehicles
                 if (vehicle.x < -150 || vehicle.x > 950) {
                     vehicles.splice(i, 1);
                 }
             }
 
-            // Spawn new vehicles (plenty of them!)
             for (let i = 0; i < 17; i++) {
                 vehicleSpawnTimer[i] -= deltaTime * 1000;
                 
                 if (vehicleSpawnTimer[i] <= 0) {
                     spawnVehicle(i);
-                    vehicleSpawnTimer[i] = 600 + Math.random() * 600; // Frequent spawning
+                    vehicleSpawnTimer[i] = 600 + Math.random() * 600;
                 }
             }
         }
@@ -230,7 +365,6 @@
         function updatePlayer(deltaTime) {
             if (!gameStarted || gameOver) return;
 
-            // Movement
             let dx = 0;
             let dy = 0;
 
@@ -239,7 +373,6 @@
             if (keys['a']) dx -= 1;
             if (keys['d']) dx += 1;
 
-            // Normalize diagonal movement
             if (dx !== 0 && dy !== 0) {
                 const length = Math.sqrt(dx * dx + dy * dy);
                 dx /= length;
@@ -249,13 +382,16 @@
             player.x += dx * player.speed * deltaTime;
             player.y += dy * player.speed * deltaTime;
 
-            // Keep player in bounds
             player.x = Math.max(15, Math.min(785 - player.width, player.x));
 
-            // Update camera to follow player
             cameraY = player.y - 300;
 
-            // Check collision with vehicles
+            // Update progress
+            const distanceTraveled = START_POSITION - player.y;
+            const progress = Math.max(0, Math.min(100, (distanceTraveled / TOTAL_DISTANCE) * 100));
+            progressValue.textContent = Math.floor(progress) + '%';
+
+            // Check vehicle collision
             for (const vehicle of vehicles) {
                 if (checkCollision(player, vehicle)) {
                     gameOver = true;
@@ -264,16 +400,21 @@
                 }
             }
 
-            // Check collision with coins
+            // Check coin collision
             for (const coin of coins) {
-                if (!coin.collected && checkCollision(player, { x: coin.x - 12, y: coin.y - 12, width: 24, height: 24 })) {
+                if (!coin.collected && checkCollision(player, { 
+                    x: coin.x - 12, 
+                    y: coin.y - 12, 
+                    width: 24, 
+                    height: 24 
+                })) {
                     coin.collected = true;
                     score += 10;
-                    scoreEl.textContent = `Score: ${score}`;
+                    scoreValue.textContent = score;
                 }
             }
 
-            // Check if reached goal
+            // Check goal
             if (player.y <= goal.y + goal.height) {
                 gameOver = true;
                 showVictoryScreen();
@@ -283,77 +424,162 @@
         function showVictoryScreen() {
             startOverlay.classList.remove('hidden');
             document.getElementById('startPanel').innerHTML = `
-                <h1 style="color: #00cc00;">YOU WIN!</h1>
-                <div style="color: white; font-size: 24px; margin: 20px 0;">
-                    Final Score: ${score}
+                <h1 style="color: #00ff00; animation: pulse 1s infinite;">🎉 VICTORY! 🎉</h1>
+                <div style="color: #ccffcc; font-size: 20px; margin: 15px 0;">
+                    You successfully crossed all 17 roads!
                 </div>
-                <button onclick="location.reload()">RESTART</button><br>
-                <button onclick="window.close()">CLOSE</button>
+                <hr>
+                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; margin: 20px 0;">
+                    <div style="color: #999; font-size: 14px; text-transform: uppercase;">Final Score</div>
+                    <div style="color: #ffcc00; font-size: 48px; font-weight: bold; text-shadow: 0 2px 10px rgba(255,204,0,0.5);">${score}</div>
+                </div>
+                <hr>
+                <button onclick="location.reload()" style="animation: bounce 2s infinite;">🔄 PLAY AGAIN</button><br>
+                <button onclick="window.close()" id="closeBtn">✕ Close</button>
+                <style>
+                    @keyframes pulse {
+                        0%, 100% { transform: scale(1); }
+                        50% { transform: scale(1.05); }
+                    }
+                    @keyframes bounce {
+                        0%, 100% { transform: translateY(0); }
+                        50% { transform: translateY(-5px); }
+                    }
+                </style>
             `;
         }
 
         function showDefeatScreen() {
             startOverlay.classList.remove('hidden');
             document.getElementById('startPanel').innerHTML = `
-                <h1 style="color: #cc0000;">YOU DIED!</h1>
-                <div style="color: white; font-size: 20px; margin: 10px 0;">
-                    Hit by a vehicle!
+                <h1 style="color: #ff3333; animation: shake 0.5s;">💥 GAME OVER 💥</h1>
+                <div style="color: #ffcccc; font-size: 20px; margin: 10px 0;">
+                    You were hit by a vehicle!
                 </div>
-                <div style="color: white; font-size: 24px; margin: 20px 0;">
-                    Final Score: ${score}
+                <hr>
+                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; margin: 20px 0;">
+                    <div style="color: #999; font-size: 14px; text-transform: uppercase;">Final Score</div>
+                    <div style="color: #ffcc00; font-size: 48px; font-weight: bold; text-shadow: 0 2px 10px rgba(255,204,0,0.5);">${score}</div>
                 </div>
-                <button onclick="location.reload()">RESTART</button><br>
-                <button onclick="window.close()">CLOSE</button>
+                <hr>
+                <div style="color: #ccc; font-size: 16px; margin: 15px 0;">
+                    💡 Tip: Time your movements between vehicles!
+                </div>
+                <button onclick="location.reload()" style="animation: bounce 2s infinite;">🔄 TRY AGAIN</button><br>
+                <button onclick="window.close()" id="closeBtn">✕ Close</button>
+                <style>
+                    @keyframes shake {
+                        0%, 100% { transform: translateX(0); }
+                        25% { transform: translateX(-10px); }
+                        75% { transform: translateX(10px); }
+                    }
+                    @keyframes bounce {
+                        0%, 100% { transform: translateY(0); }
+                        50% { transform: translateY(-5px); }
+                    }
+                </style>
             `;
         }
 
         function draw() {
-            // Clear canvas
-            ctx.fillStyle = '#263d26';
+            // Clear with gradient background
+            const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            gradient.addColorStop(0, '#1a2e1a');
+            gradient.addColorStop(1, '#0f1f0f');
+            ctx.fillStyle = gradient;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
             ctx.save();
             ctx.translate(0, -cameraY);
 
-            // Draw start zone
-            ctx.fillStyle = '#336633';
+            // Draw start zone with gradient
+            const startGradient = ctx.createLinearGradient(0, 600, 0, 700);
+            startGradient.addColorStop(0, '#2a4a2a');
+            startGradient.addColorStop(1, '#1a3a1a');
+            ctx.fillStyle = startGradient;
             ctx.fillRect(0, 600, 800, 100);
+            
+            ctx.fillStyle = 'rgba(200, 255, 200, 0.3)';
+            ctx.font = 'bold 24px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('START ZONE', 400, 660);
 
-            // Draw roads
-            ctx.fillStyle = '#333333';
+            // Draw roads with lines
+            ctx.fillStyle = '#1a1a1a';
             for (const road of roads) {
                 ctx.fillRect(0, road.y, 800, road.height);
+                
+                // Road markings
+                ctx.fillStyle = '#ffff00';
+                for (let x = 50; x < 800; x += 100) {
+                    ctx.fillRect(x, road.y + 35, 40, 10);
+                }
+                ctx.fillStyle = '#1a1a1a';
             }
 
-            // Draw goal
-            ctx.fillStyle = 'rgba(0, 200, 0, 0.7)';
+            // Draw goal with animation
+            goal.pulseTime += 0.05;
+            const goalAlpha = 0.7 + Math.sin(goal.pulseTime) * 0.3;
+            
+            const goalGradient = ctx.createLinearGradient(0, goal.y, 0, goal.y + goal.height);
+            goalGradient.addColorStop(0, `rgba(0, 255, 0, ${goalAlpha})`);
+            goalGradient.addColorStop(0.5, `rgba(0, 220, 0, ${goalAlpha * 0.8})`);
+            goalGradient.addColorStop(1, `rgba(0, 180, 0, ${goalAlpha * 0.6})`);
+            ctx.fillStyle = goalGradient;
             ctx.fillRect(0, goal.y, 800, goal.height);
+            
             ctx.fillStyle = 'white';
-            ctx.font = 'bold 32px Arial';
+            ctx.font = 'bold 40px Arial';
             ctx.textAlign = 'center';
+            ctx.shadowColor = 'rgba(0, 200, 0, 0.8)';
+            ctx.shadowBlur = 10;
             ctx.fillText('★ GOAL ★', 400, goal.y + 60);
+            ctx.shadowBlur = 0;
 
-            // Draw coins
+            // Draw coins with glow and animation
             for (const coin of coins) {
                 if (!coin.collected) {
-                    ctx.fillStyle = '#ffcc00';
+                    coin.pulseTime += 0.05;
+                    const pulseScale = 1 + Math.sin(coin.pulseTime * 3) * 0.15;
+                    
+                    // Glow
                     ctx.beginPath();
-                    ctx.arc(coin.x, coin.y, 12, 0, Math.PI * 2);
+                    ctx.arc(coin.x, coin.y, 16 * pulseScale, 0, Math.PI * 2);
+                    const glowGradient = ctx.createRadialGradient(coin.x, coin.y, 0, coin.x, coin.y, 16 * pulseScale);
+                    glowGradient.addColorStop(0, 'rgba(255, 204, 0, 0.6)');
+                    glowGradient.addColorStop(1, 'rgba(255, 204, 0, 0)');
+                    ctx.fillStyle = glowGradient;
                     ctx.fill();
-                    ctx.fillStyle = '#fff5aa';
+                    
+                    // Coin
                     ctx.beginPath();
-                    ctx.arc(coin.x, coin.y, 8, 0, Math.PI * 2);
+                    ctx.arc(coin.x, coin.y, 12 * pulseScale, 0, Math.PI * 2);
+                    const coinGradient = ctx.createRadialGradient(coin.x - 4, coin.y - 4, 0, coin.x, coin.y, 12 * pulseScale);
+                    coinGradient.addColorStop(0, '#ffff99');
+                    coinGradient.addColorStop(0.7, '#ffcc00');
+                    coinGradient.addColorStop(1, '#cc9900');
+                    ctx.fillStyle = coinGradient;
+                    ctx.fill();
+                    
+                    // Shine
+                    ctx.beginPath();
+                    ctx.arc(coin.x - 4, coin.y - 4, 3, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
                     ctx.fill();
                 }
             }
 
-            // Draw vehicles
+            // Draw vehicles with details
             for (const vehicle of vehicles) {
-                ctx.fillStyle = vehicle.color;
+                // Vehicle body gradient
+                const vGradient = ctx.createLinearGradient(vehicle.x, vehicle.y, vehicle.x, vehicle.y + vehicle.height);
+                vGradient.addColorStop(0, vehicle.color);
+                vGradient.addColorStop(1, '#000');
+                ctx.fillStyle = vGradient;
                 ctx.fillRect(vehicle.x, vehicle.y, vehicle.width, vehicle.height);
                 
                 // Windows
-                ctx.fillStyle = '#4d6b8a';
+                ctx.fillStyle = 'rgba(77, 107, 138, 0.8)';
                 if (vehicle.direction > 0) {
                     ctx.fillRect(vehicle.x + 10, vehicle.y + 5, 15, 10);
                     ctx.fillRect(vehicle.x + 55, vehicle.y + 5, 15, 10);
@@ -361,12 +587,32 @@
                     ctx.fillRect(vehicle.x + 10, vehicle.y + 5, 15, 10);
                     ctx.fillRect(vehicle.x + 55, vehicle.y + 5, 15, 10);
                 }
+                
+                // Headlights
+                ctx.fillStyle = vehicle.direction > 0 ? '#ffff99' : '#ff3333';
+                const lightX = vehicle.direction > 0 ? vehicle.x + vehicle.width - 5 : vehicle.x + 5;
+                ctx.fillRect(lightX - 3, vehicle.y + 25, 6, 8);
             }
 
-            // Draw player
+            // Draw player with gradient
             if (!gameOver) {
-                ctx.fillStyle = player.color;
+                const playerGradient = ctx.createRadialGradient(
+                    player.x + player.width / 2, 
+                    player.y + player.height / 2, 
+                    0,
+                    player.x + player.width / 2, 
+                    player.y + player.height / 2, 
+                    player.width
+                );
+                playerGradient.addColorStop(0, '#66ff99');
+                playerGradient.addColorStop(1, '#33cc55');
+                ctx.fillStyle = playerGradient;
                 ctx.fillRect(player.x, player.y, player.width, player.height);
+                
+                // Player outline
+                ctx.strokeStyle = '#22aa44';
+                ctx.lineWidth = 2;
+                ctx.strokeRect(player.x, player.y, player.width, player.height);
             }
 
             ctx.restore();

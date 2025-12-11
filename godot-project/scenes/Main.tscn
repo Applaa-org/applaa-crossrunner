@@ -9,16 +9,19 @@
 [node name="Main" type="Node2D"]
 script = ExtResource("1")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(400, 300)
-anchor_mode = 0
-
 [node name="Background" type="ColorRect" parent="."]
 offset_left = -100.0
 offset_top = -2000.0
 offset_right = 900.0
 offset_bottom = 700.0
-color = Color(0.15, 0.25, 0.15, 1)
+color = Color(0.1, 0.18, 0.12, 1)
+
+[node name="BackgroundPattern" type="ColorRect" parent="."]
+offset_left = -100.0
+offset_top = -2000.0
+offset_right = 900.0
+offset_bottom = 700.0
+color = Color(0.15, 0.25, 0.15, 0.3)
 
 [node name="Goal" parent="." instance=ExtResource("5")]
 position = Vector2(400, -1900)
@@ -28,109 +31,238 @@ offset_left = -100.0
 offset_top = 600.0
 offset_right = 900.0
 offset_bottom = 700.0
-color = Color(0.2, 0.4, 0.2, 1)
+color = Color(0.25, 0.45, 0.25, 1)
+
+[node name="StartZoneLabel" type="Label" parent="StartZone"]
+offset_left = 350.0
+offset_top = 30.0
+offset_right = 550.0
+offset_bottom = 70.0
+theme_override_colors/font_color = Color(0.8, 1, 0.8, 0.7)
+theme_override_font_sizes/font_size = 24
+text = "START ZONE"
+horizontal_alignment = 1
 
 [node name="Road1" type="ColorRect" parent="."]
 offset_top = 500.0
 offset_right = 800.0
 offset_bottom = 580.0
-color = Color(0.2, 0.2, 0.2, 1)
+color = Color(0.15, 0.15, 0.15, 1)
+
+[node name="RoadLine1" type="ColorRect" parent="Road1"]
+offset_left = 395.0
+offset_top = 35.0
+offset_right = 405.0
+offset_bottom = 45.0
+color = Color(0.9, 0.9, 0, 1)
 
 [node name="Road2" type="ColorRect" parent="."]
 offset_top = 360.0
 offset_right = 800.0
 offset_bottom = 440.0
-color = Color(0.2, 0.2, 0.2, 1)
+color = Color(0.15, 0.15, 0.15, 1)
+
+[node name="RoadLine2" type="ColorRect" parent="Road2"]
+offset_left = 395.0
+offset_top = 35.0
+offset_right = 405.0
+offset_bottom = 45.0
+color = Color(0.9, 0.9, 0, 1)
 
 [node name="Road3" type="ColorRect" parent="."]
 offset_top = 220.0
 offset_right = 800.0
 offset_bottom = 300.0
-color = Color(0.2, 0.2, 0.2, 1)
+color = Color(0.15, 0.15, 0.15, 1)
+
+[node name="RoadLine3" type="ColorRect" parent="Road3"]
+offset_left = 395.0
+offset_top = 35.0
+offset_right = 405.0
+offset_bottom = 45.0
+color = Color(0.9, 0.9, 0, 1)
 
 [node name="Road4" type="ColorRect" parent="."]
 offset_top = 80.0
 offset_right = 800.0
 offset_bottom = 160.0
-color = Color(0.2, 0.2, 0.2, 1)
+color = Color(0.15, 0.15, 0.15, 1)
+
+[node name="RoadLine4" type="ColorRect" parent="Road4"]
+offset_left = 395.0
+offset_top = 35.0
+offset_right = 405.0
+offset_bottom = 45.0
+color = Color(0.9, 0.9, 0, 1)
 
 [node name="Road5" type="ColorRect" parent="."]
 offset_top = -60.0
 offset_right = 800.0
 offset_bottom = 20.0
-color = Color(0.2, 0.2, 0.2, 1)
+color = Color(0.15, 0.15, 0.15, 1)
+
+[node name="RoadLine5" type="ColorRect" parent="Road5"]
+offset_left = 395.0
+offset_top = 35.0
+offset_right = 405.0
+offset_bottom = 45.0
+color = Color(0.9, 0.9, 0, 1)
 
 [node name="Road6" type="ColorRect" parent="."]
 offset_top = -200.0
 offset_right = 800.0
 offset_bottom = -120.0
-color = Color(0.2, 0.2, 0.2, 1)
+color = Color(0.15, 0.15, 0.15, 1)
+
+[node name="RoadLine6" type="ColorRect" parent="Road6"]
+offset_left = 395.0
+offset_top = 35.0
+offset_right = 405.0
+offset_bottom = 45.0
+color = Color(0.9, 0.9, 0, 1)
 
 [node name="Road7" type="ColorRect" parent="."]
 offset_top = -340.0
 offset_right = 800.0
 offset_bottom = -260.0
-color = Color(0.2, 0.2, 0.2, 1)
+color = Color(0.15, 0.15, 0.15, 1)
+
+[node name="RoadLine7" type="ColorRect" parent="Road7"]
+offset_left = 395.0
+offset_top = 35.0
+offset_right = 405.0
+offset_bottom = 45.0
+color = Color(0.9, 0.9, 0, 1)
 
 [node name="Road8" type="ColorRect" parent="."]
 offset_top = -480.0
 offset_right = 800.0
 offset_bottom = -400.0
-color = Color(0.2, 0.2, 0.2, 1)
+color = Color(0.15, 0.15, 0.15, 1)
+
+[node name="RoadLine8" type="ColorRect" parent="Road8"]
+offset_left = 395.0
+offset_top = 35.0
+offset_right = 405.0
+offset_bottom = 45.0
+color = Color(0.9, 0.9, 0, 1)
 
 [node name="Road9" type="ColorRect" parent="."]
 offset_top = -620.0
 offset_right = 800.0
 offset_bottom = -540.0
-color = Color(0.2, 0.2, 0.2, 1)
+color = Color(0.15, 0.15, 0.15, 1)
+
+[node name="RoadLine9" type="ColorRect" parent="Road9"]
+offset_left = 395.0
+offset_top = 35.0
+offset_right = 405.0
+offset_bottom = 45.0
+color = Color(0.9, 0.9, 0, 1)
 
 [node name="Road10" type="ColorRect" parent="."]
 offset_top = -760.0
 offset_right = 800.0
 offset_bottom = -680.0
-color = Color(0.2, 0.2, 0.2, 1)
+color = Color(0.15, 0.15, 0.15, 1)
+
+[node name="RoadLine10" type="ColorRect" parent="Road10"]
+offset_left = 395.0
+offset_top = 35.0
+offset_right = 405.0
+offset_bottom = 45.0
+color = Color(0.9, 0.9, 0, 1)
 
 [node name="Road11" type="ColorRect" parent="."]
 offset_top = -900.0
 offset_right = 800.0
 offset_bottom = -820.0
-color = Color(0.2, 0.2, 0.2, 1)
+color = Color(0.15, 0.15, 0.15, 1)
+
+[node name="RoadLine11" type="ColorRect" parent="Road11"]
+offset_left = 395.0
+offset_top = 35.0
+offset_right = 405.0
+offset_bottom = 45.0
+color = Color(0.9, 0.9, 0, 1)
 
 [node name="Road12" type="ColorRect" parent="."]
 offset_top = -1040.0
 offset_right = 800.0
 offset_bottom = -960.0
-color = Color(0.2, 0.2, 0.2, 1)
+color = Color(0.15, 0.15, 0.15, 1)
+
+[node name="RoadLine12" type="ColorRect" parent="Road12"]
+offset_left = 395.0
+offset_top = 35.0
+offset_right = 405.0
+offset_bottom = 45.0
+color = Color(0.9, 0.9, 0, 1)
 
 [node name="Road13" type="ColorRect" parent="."]
 offset_top = -1180.0
 offset_right = 800.0
 offset_bottom = -1100.0
-color = Color(0.2, 0.2, 0.2, 1)
+color = Color(0.15, 0.15, 0.15, 1)
+
+[node name="RoadLine13" type="ColorRect" parent="Road13"]
+offset_left = 395.0
+offset_top = 35.0
+offset_right = 405.0
+offset_bottom = 45.0
+color = Color(0.9, 0.9, 0, 1)
 
 [node name="Road14" type="ColorRect" parent="."]
 offset_top = -1320.0
 offset_right = 800.0
 offset_bottom = -1240.0
-color = Color(0.2, 0.2, 0.2, 1)
+color = Color(0.15, 0.15, 0.15, 1)
+
+[node name="RoadLine14" type="ColorRect" parent="Road14"]
+offset_left = 395.0
+offset_top = 35.0
+offset_right = 405.0
+offset_bottom = 45.0
+color = Color(0.9, 0.9, 0, 1)
 
 [node name="Road15" type="ColorRect" parent="."]
 offset_top = -1460.0
 offset_right = 800.0
 offset_bottom = -1380.0
-color = Color(0.2, 0.2, 0.2, 1)
+color = Color(0.15, 0.15, 0.15, 1)
+
+[node name="RoadLine15" type="ColorRect" parent="Road15"]
+offset_left = 395.0
+offset_top = 35.0
+offset_right = 405.0
+offset_bottom = 45.0
+color = Color(0.9, 0.9, 0, 1)
 
 [node name="Road16" type="ColorRect" parent="."]
 offset_top = -1600.0
 offset_right = 800.0
 offset_bottom = -1520.0
-color = Color(0.2, 0.2, 0.2, 1)
+color = Color(0.15, 0.15, 0.15, 1)
+
+[node name="RoadLine16" type="ColorRect" parent="Road16"]
+offset_left = 395.0
+offset_top = 35.0
+offset_right = 405.0
+offset_bottom = 45.0
+color = Color(0.9, 0.9, 0, 1)
 
 [node name="Road17" type="ColorRect" parent="."]
 offset_top = -1740.0
 offset_right = 800.0
 offset_bottom = -1660.0
-color = Color(0.2, 0.2, 0.2, 1)
+color = Color(0.15, 0.15, 0.15, 1)
+
+[node name="RoadLine17" type="ColorRect" parent="Road17"]
+offset_left = 395.0
+offset_top = 35.0
+offset_right = 405.0
+offset_bottom = 45.0
+color = Color(0.9, 0.9, 0, 1)
 
 [node name="Player" parent="." instance=ExtResource("2")]
 position = Vector2(400, 650)
@@ -297,14 +429,61 @@ position = Vector2(400, -1560)
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="ScoreLabel" type="Label" parent="UI"]
+[node name="ScorePanel" type="PanelContainer" parent="UI"]
 offset_left = 10.0
 offset_top = 10.0
-offset_right = 200.0
-offset_bottom = 50.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
+offset_right = 210.0
+offset_bottom = 70.0
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/ScorePanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/ScorePanel/MarginContainer"]
+layout_mode = 2
+
+[node name="ScoreTitle" type="Label" parent="UI/ScorePanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+theme_override_font_sizes/font_size = 14
+text = "SCORE"
+
+[node name="ScoreLabel" type="Label" parent="UI/ScorePanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85, 0, 1)
+theme_override_font_sizes/font_size = 28
+text = "0"
+
+[node name="ProgressPanel" type="PanelContainer" parent="UI"]
+offset_left = 600.0
+offset_top = 10.0
+offset_right = 790.0
+offset_bottom = 70.0
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/ProgressPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/ProgressPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="ProgressTitle" type="Label" parent="UI/ProgressPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+theme_override_font_sizes/font_size = 14
+text = "PROGRESS"
+
+[node name="ProgressLabel" type="Label" parent="UI/ProgressPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.8, 1, 1)
 theme_override_font_sizes/font_size = 24
-text = "Score: 0"
+text = "0%"
 
 [node name="StartOverlay" type="Control" parent="UI"]
 layout_mode = 3
@@ -321,7 +500,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.85)
+color = Color(0, 0, 0, 0.9)
 
 [node name="CenterContainer" type="CenterContainer" parent="UI/StartOverlay"]
 layout_mode = 1
@@ -336,46 +515,64 @@ layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/StartOverlay/CenterContainer/PanelContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 50
-theme_override_constants/margin_top = 50
-theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = 50
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_top = 60
+theme_override_constants/margin_right = 60
+theme_override_constants/margin_bottom = 60
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/StartOverlay/CenterContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 25
+theme_override_constants/separation = 30
 
 [node name="TitleLabel" type="Label" parent="UI/StartOverlay/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.85, 0, 1)
-theme_override_font_sizes/font_size = 56
+theme_override_colors/font_shadow_color = Color(1, 0.6, 0, 0.5)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_font_sizes/font_size = 64
 text = "CROSSRUNNER"
 horizontal_alignment = 1
+
+[node name="SubtitleLabel" type="Label" parent="UI/StartOverlay/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
+theme_override_font_sizes/font_size = 18
+text = "The Ultimate Traffic Dodging Challenge"
+horizontal_alignment = 1
+
+[node name="Separator1" type="HSeparator" parent="UI/StartOverlay/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
 
 [node name="InstructionsLabel" type="Label" parent="UI/StartOverlay/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 20
-text = "Use W/A/S/D to move
+text = "🎮 Use W/A/S/D to move
 
-Cross 17 roads filled with FAST traffic!
-Collect sparse coins for extra points (risky!)
-Reach the green goal zone at the top
+🚗 Cross 17 roads filled with FAST traffic!
+💰 Collect sparse coins for extra points (risky!)
+🎯 Reach the green goal zone at the top
 
-Don't get hit!"
+⚠️ Don't get hit!"
 horizontal_alignment = 1
 
-[node name="StartButton" type="Button" parent="UI/StartOverlay/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(250, 60)
+[node name="Separator2" type="HSeparator" parent="UI/StartOverlay/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 28
-text = "START GAME"
+
+[node name="StartButton" type="Button" parent="UI/StartOverlay/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(300, 70)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "▶ START GAME"
 
 [node name="CloseButton" type="Button" parent="UI/StartOverlay/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(250, 60)
+custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
-theme_override_font_sizes/font_size = 28
-text = "CLOSE"
+theme_override_font_sizes/font_size = 24
+text = "✕ CLOSE"
 
 [editable path="VehicleSpawner1L"]
 [editable path="VehicleSpawner1R"]
