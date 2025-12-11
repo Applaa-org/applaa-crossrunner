@@ -3,10 +3,8 @@ extends Node2D
 @onready var player: CharacterBody2D = $Player
 @onready var score_label: Label = $UI/ScoreLabel
 @onready var start_overlay: Control = $UI/StartOverlay
-@onready var start_button: Button = $UI/StartOverlay/CenterContainer/VBoxContainer/StartButton
-@onready var close_button: Button = $UI/StartOverlay/CenterContainer/VBoxContainer/CloseButton
-@onready var title_label: Label = $UI/StartOverlay/CenterContainer/VBoxContainer/TitleLabel
-@onready var instructions_label: Label = $UI/StartOverlay/CenterContainer/VBoxContainer/InstructionsLabel
+@onready var start_button: Button = $UI/StartOverlay/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/StartButton
+@onready var close_button: Button = $UI/StartOverlay/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CloseButton
 
 func _ready() -> void:
 	Global.reset_game()

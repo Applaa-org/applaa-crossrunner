@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crossrunner - Preview</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #1a1a1a;
+            font-family: Arial, sans-serif;
+        }
+        #gameContainer {
+            position: relative;
+        }
+        canvas {
+            border: 2px solid #333;
+            display: block;
+        }
+        #startOverlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+        #startPanel {
+            background: #2a2a2a;
+            padding: 40px;
+            border-radius: 10px;
+            text-align: center;
+            border: 3px solid #ffcc00;
+        }
+        h1 {
+            color: #ffcc00;
+            margin: 0 0 20px 0;
+            font-size: 48px;
+        }
+        #instructions {
+            color: #fff;
+            margin: 20px 0;
+            line-height: 1.8;
+            font-size: 18px;
+        }
+        button {
+            background: #ffcc00;
+            border: none;
+            padding: 15px 40px;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 10px;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: #ffaa00;
+        }
+        #score {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            z-index: 5;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div id="gameContainer">
+        <canvas id="gameCanvas" width="800" height="600"></canvas>
+        <div id="score">Score: 0</div>
+        <div id="startOverlay">
+            <div id="startPanel">
+                <h1>CROSSRUNNER</h1>
+                <div id="instructions">
+                    Use W/A/S/D to move<br><br>
+                    Cross 17 roads filled with FAST traffic!<br>
+                    Collect sparse coins for extra points (risky!)<br>
+                    Reach the green goal zone at the top<br><br>
+                    Don't get hit!
+                </div>
+                <button id="startBtn">START GAME</button><br>
+                <button id="closeBtn">CLOSE</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const startOverlay = document.getElementById('startOverlay');
+        const startBtn = document.getElementById('startBtn');
+        const closeBtn = document.getElementById('closeBtn');
+        const scoreEl = document.getElementById('score');
+
+        let gameStarted = false;
+        let gameOver = false;
+        let score = 0;
+
+        // Camera
+        let cameraY = 0;
+
+        // Player
+        const player = {
+            x: 400,
+            y: 650,
+            width: 30,
+            height: 30,
+            speed: 150,
+            color: '#33cc55'
+        };
+
+        // Roads (17 roads, positioned from bottom to top)
+        const roads = [];
+        for (let i = 0; i < 17; i++) {
+            roads.push({
+                y: 500 - (i * 140),
+                height: 80
+            });
+        }
+
+        // Goal
+        const goal = {
+            y: -1900,
+            height: 100
+        };
+
+        // Vehicles
+        const vehicles = [];
+        const vehicleSpawnTimer = {};
+
+        // Initialize spawn timers for each road
+        for (let i = 0; i < 17; i++) {
+            vehicleSpawnTimer[i] = Math.random() * 800;
+        }
+
+        // Coins (sparse, risky placement)
+        const coins = [
+            { x: 600, y: 400, collected: false },
+            { x: 200, y: 120, collected: false },
+            { x: 500, y: -160, collected: false },
+            { x: 300, y: -440, collected: false },
+            { x: 650, y: -720, collected: false },
+            { x: 150, y: -1000, collected: false },
+            { x: 700, y: -1280, collected: false },
+            { x: 400, y: -1560, collected: false }
+        ];
+
+        // Input
+        const keys = {};
+        window.addEventListener('keydown', (e) => {
+            keys[e.key.toLowerCase()] = true;
+        });
+        window.addEventListener('keyup', (e) => {
+            keys[e.key.toLowerCase()] = false;
+        });
+
+        // Start button
+        startBtn.addEventListener('click', () => {
+            gameStarted = true;
+            startOverlay.classList.add('hidden');
+        });
+
+        // Close button
+        closeBtn.addEventListener('click', () => {
+            window.close();
+        });
+
+        function spawnVehicle(roadIndex) {
+            const roadY = 540 - (roadIndex * 140);
+            const direction = Math.random() > 0.5 ? 1 : -1;
+            const speed = 350 + Math.random() * 200; // Fast!
+            
+            vehicles.push({
+                x: direction > 0 ? -80 : 880,
+                y: roadY,
+                width: 80,
+                height: 40,
+                speed: speed,
+                direction: direction,
+                color: `hsl(${Math.random() * 60}, 70%, 50%)`
+            });
+        }
+
+        function updateVehicles(deltaTime) {
+            // Update existing vehicles
+            for (let i = vehicles.length - 1; i >= 0; i--) {
+                const vehicle = vehicles[i];
+                vehicle.x += vehicle.speed * vehicle.direction * deltaTime;
+                
+                // Remove off-screen vehicles
+                if (vehicle.x < -150 || vehicle.x > 950) {
+                    vehicles.splice(i, 1);
+                }
+            }
+
+            // Spawn new vehicles (plenty of them!)
+            for (let i = 0; i < 17; i++) {
+                vehicleSpawnTimer[i] -= deltaTime * 1000;
+                
+                if (vehicleSpawnTimer[i] <= 0) {
+                    spawnVehicle(i);
+                    vehicleSpawnTimer[i] = 600 + Math.random() * 600; // Frequent spawning
+                }
+            }
+        }
+
+        function checkCollision(rect1, rect2) {
+            return rect1.x < rect2.x + rect2.width &&
+                   rect1.x + rect1.width > rect2.x &&
+                   rect1.y < rect2.y + rect2.height &&
+                   rect1.y + rect1.height > rect2.y;
+        }
+
+        function updatePlayer(deltaTime) {
+            if (!gameStarted || gameOver) return;
+
+            // Movement
+            let dx = 0;
+            let dy = 0;
+
+            if (keys['w']) dy -= 1;
+            if (keys['s']) dy += 1;
+            if (keys['a']) dx -= 1;
+            if (keys['d']) dx += 1;
+
+            // Normalize diagonal movement
+            if (dx !== 0 && dy !== 0) {
+                const length = Math.sqrt(dx * dx + dy * dy);
+                dx /= length;
+                dy /= length;
+            }
+
+            player.x += dx * player.speed * deltaTime;
+            player.y += dy * player.speed * deltaTime;
+
+            // Keep player in bounds
+            player.x = Math.max(15, Math.min(785 - player.width, player.x));
+
+            // Update camera to follow player
+            cameraY = player.y - 300;
+
+            // Check collision with vehicles
+            for (const vehicle of vehicles) {
+                if (checkCollision(player, vehicle)) {
+                    gameOver = true;
+                    showDefeatScreen();
+                    return;
+                }
+            }
+
+            // Check collision with coins
+            for (const coin of coins) {
+                if (!coin.collected && checkCollision(player, { x: coin.x - 12, y: coin.y - 12, width: 24, height: 24 })) {
+                    coin.collected = true;
+                    score += 10;
+                    scoreEl.textContent = `Score: ${score}`;
+                }
+            }
+
+            // Check if reached goal
+            if (player.y <= goal.y + goal.height) {
+                gameOver = true;
+                showVictoryScreen();
+            }
+        }
+
+        function showVictoryScreen() {
+            startOverlay.classList.remove('hidden');
+            document.getElementById('startPanel').innerHTML = `
+                <h1 style="color: #00cc00;">YOU WIN!</h1>
+                <div style="color: white; font-size: 24px; margin: 20px 0;">
+                    Final Score: ${score}
+                </div>
+                <button onclick="location.reload()">RESTART</button><br>
+                <button onclick="window.close()">CLOSE</button>
+            `;
+        }
+
+        function showDefeatScreen() {
+            startOverlay.classList.remove('hidden');
+            document.getElementById('startPanel').innerHTML = `
+                <h1 style="color: #cc0000;">YOU DIED!</h1>
+                <div style="color: white; font-size: 20px; margin: 10px 0;">
+                    Hit by a vehicle!
+                </div>
+                <div style="color: white; font-size: 24px; margin: 20px 0;">
+                    Final Score: ${score}
+                </div>
+                <button onclick="location.reload()">RESTART</button><br>
+                <button onclick="window.close()">CLOSE</button>
+            `;
+        }
+
+        function draw() {
+            // Clear canvas
+            ctx.fillStyle = '#263d26';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.save();
+            ctx.translate(0, -cameraY);
+
+            // Draw start zone
+            ctx.fillStyle = '#336633';
+            ctx.fillRect(0, 600, 800, 100);
+
+            // Draw roads
+            ctx.fillStyle = '#333333';
+            for (const road of roads) {
+                ctx.fillRect(0, road.y, 800, road.height);
+            }
+
+            // Draw goal
+            ctx.fillStyle = 'rgba(0, 200, 0, 0.7)';
+            ctx.fillRect(0, goal.y, 800, goal.height);
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 32px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('★ GOAL ★', 400, goal.y + 60);
+
+            // Draw coins
+            for (const coin of coins) {
+                if (!coin.collected) {
+                    ctx.fillStyle = '#ffcc00';
+                    ctx.beginPath();
+                    ctx.arc(coin.x, coin.y, 12, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.fillStyle = '#fff5aa';
+                    ctx.beginPath();
+                    ctx.arc(coin.x, coin.y, 8, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            // Draw vehicles
+            for (const vehicle of vehicles) {
+                ctx.fillStyle = vehicle.color;
+                ctx.fillRect(vehicle.x, vehicle.y, vehicle.width, vehicle.height);
+                
+                // Windows
+                ctx.fillStyle = '#4d6b8a';
+                if (vehicle.direction > 0) {
+                    ctx.fillRect(vehicle.x + 10, vehicle.y + 5, 15, 10);
+                    ctx.fillRect(vehicle.x + 55, vehicle.y + 5, 15, 10);
+                } else {
+                    ctx.fillRect(vehicle.x + 10, vehicle.y + 5, 15, 10);
+                    ctx.fillRect(vehicle.x + 55, vehicle.y + 5, 15, 10);
+                }
+            }
+
+            // Draw player
+            if (!gameOver) {
+                ctx.fillStyle = player.color;
+                ctx.fillRect(player.x, player.y, player.width, player.height);
+            }
+
+            ctx.restore();
+        }
+
+        // Game loop
+        let lastTime = performance.now();
+        function gameLoop() {
+            const currentTime = performance.now();
+            const deltaTime = (currentTime - lastTime) / 1000;
+            lastTime = currentTime;
+
+            if (gameStarted && !gameOver) {
+                updatePlayer(deltaTime);
+                updateVehicles(deltaTime);
+            }
+
+            draw();
+            requestAnimationFrame(gameLoop);
+        }
+
+        gameLoop();
+    </script>
+</body>
+</html>

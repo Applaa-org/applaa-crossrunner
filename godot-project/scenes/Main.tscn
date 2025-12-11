@@ -9,74 +9,291 @@
 [node name="Main" type="Node2D"]
 script = ExtResource("1")
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(400, 300)
+anchor_mode = 0
+
 [node name="Background" type="ColorRect" parent="."]
-offset_right = 800.0
-offset_bottom = 600.0
+offset_left = -100.0
+offset_top = -2000.0
+offset_right = 900.0
+offset_bottom = 700.0
 color = Color(0.15, 0.25, 0.15, 1)
 
+[node name="Goal" parent="." instance=ExtResource("5")]
+position = Vector2(400, -1900)
+
+[node name="StartZone" type="ColorRect" parent="."]
+offset_left = -100.0
+offset_top = 600.0
+offset_right = 900.0
+offset_bottom = 700.0
+color = Color(0.2, 0.4, 0.2, 1)
+
 [node name="Road1" type="ColorRect" parent="."]
-offset_top = 100.0
+offset_top = 500.0
 offset_right = 800.0
-offset_bottom = 180.0
+offset_bottom = 580.0
 color = Color(0.2, 0.2, 0.2, 1)
 
 [node name="Road2" type="ColorRect" parent="."]
+offset_top = 360.0
+offset_right = 800.0
+offset_bottom = 440.0
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Road3" type="ColorRect" parent="."]
 offset_top = 220.0
 offset_right = 800.0
 offset_bottom = 300.0
 color = Color(0.2, 0.2, 0.2, 1)
 
-[node name="Road3" type="ColorRect" parent="."]
-offset_top = 340.0
-offset_right = 800.0
-offset_bottom = 420.0
-color = Color(0.2, 0.2, 0.2, 1)
-
 [node name="Road4" type="ColorRect" parent="."]
-offset_top = 460.0
+offset_top = 80.0
 offset_right = 800.0
-offset_bottom = 540.0
+offset_bottom = 160.0
 color = Color(0.2, 0.2, 0.2, 1)
 
-[node name="Goal" parent="." instance=ExtResource("5")]
-position = Vector2(400, 30)
+[node name="Road5" type="ColorRect" parent="."]
+offset_top = -60.0
+offset_right = 800.0
+offset_bottom = 20.0
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Road6" type="ColorRect" parent="."]
+offset_top = -200.0
+offset_right = 800.0
+offset_bottom = -120.0
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Road7" type="ColorRect" parent="."]
+offset_top = -340.0
+offset_right = 800.0
+offset_bottom = -260.0
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Road8" type="ColorRect" parent="."]
+offset_top = -480.0
+offset_right = 800.0
+offset_bottom = -400.0
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Road9" type="ColorRect" parent="."]
+offset_top = -620.0
+offset_right = 800.0
+offset_bottom = -540.0
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Road10" type="ColorRect" parent="."]
+offset_top = -760.0
+offset_right = 800.0
+offset_bottom = -680.0
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Road11" type="ColorRect" parent="."]
+offset_top = -900.0
+offset_right = 800.0
+offset_bottom = -820.0
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Road12" type="ColorRect" parent="."]
+offset_top = -1040.0
+offset_right = 800.0
+offset_bottom = -960.0
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Road13" type="ColorRect" parent="."]
+offset_top = -1180.0
+offset_right = 800.0
+offset_bottom = -1100.0
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Road14" type="ColorRect" parent="."]
+offset_top = -1320.0
+offset_right = 800.0
+offset_bottom = -1240.0
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Road15" type="ColorRect" parent="."]
+offset_top = -1460.0
+offset_right = 800.0
+offset_bottom = -1380.0
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Road16" type="ColorRect" parent="."]
+offset_top = -1600.0
+offset_right = 800.0
+offset_bottom = -1520.0
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Road17" type="ColorRect" parent="."]
+offset_top = -1740.0
+offset_right = 800.0
+offset_bottom = -1660.0
+color = Color(0.2, 0.2, 0.2, 1)
 
 [node name="Player" parent="." instance=ExtResource("2")]
-position = Vector2(400, 570)
+position = Vector2(400, 650)
 
-[node name="VehicleSpawner1" type="Node2D" parent="."]
-position = Vector2(0, 140)
+[node name="VehicleSpawner1L" type="Node2D" parent="."]
+position = Vector2(-50, 540)
 script = preload("res://scripts/VehicleSpawner.gd")
 
-[node name="VehicleSpawner2" type="Node2D" parent="."]
-position = Vector2(800, 260)
+[node name="VehicleSpawner1R" type="Node2D" parent="."]
+position = Vector2(850, 540)
 script = preload("res://scripts/VehicleSpawner.gd")
 
-[node name="VehicleSpawner3" type="Node2D" parent="."]
-position = Vector2(0, 380)
+[node name="VehicleSpawner2L" type="Node2D" parent="."]
+position = Vector2(-50, 400)
 script = preload("res://scripts/VehicleSpawner.gd")
 
-[node name="VehicleSpawner4" type="Node2D" parent="."]
-position = Vector2(800, 500)
+[node name="VehicleSpawner2R" type="Node2D" parent="."]
+position = Vector2(850, 400)
+script = preload("res://scripts/VehicleSpawner.gd")
+
+[node name="VehicleSpawner3L" type="Node2D" parent="."]
+position = Vector2(-50, 260)
+script = preload("res://scripts/VehicleSpawner.gd")
+
+[node name="VehicleSpawner3R" type="Node2D" parent="."]
+position = Vector2(850, 260)
+script = preload("res://scripts/VehicleSpawner.gd")
+
+[node name="VehicleSpawner4L" type="Node2D" parent="."]
+position = Vector2(-50, 120)
+script = preload("res://scripts/VehicleSpawner.gd")
+
+[node name="VehicleSpawner4R" type="Node2D" parent="."]
+position = Vector2(850, 120)
+script = preload("res://scripts/VehicleSpawner.gd")
+
+[node name="VehicleSpawner5L" type="Node2D" parent="."]
+position = Vector2(-50, -20)
+script = preload("res://scripts/VehicleSpawner.gd")
+
+[node name="VehicleSpawner5R" type="Node2D" parent="."]
+position = Vector2(850, -20)
+script = preload("res://scripts/VehicleSpawner.gd")
+
+[node name="VehicleSpawner6L" type="Node2D" parent="."]
+position = Vector2(-50, -160)
+script = preload("res://scripts/VehicleSpawner.gd")
+
+[node name="VehicleSpawner6R" type="Node2D" parent="."]
+position = Vector2(850, -160)
+script = preload("res://scripts/VehicleSpawner.gd")
+
+[node name="VehicleSpawner7L" type="Node2D" parent="."]
+position = Vector2(-50, -300)
+script = preload("res://scripts/VehicleSpawner.gd")
+
+[node name="VehicleSpawner7R" type="Node2D" parent="."]
+position = Vector2(850, -300)
+script = preload("res://scripts/VehicleSpawner.gd")
+
+[node name="VehicleSpawner8L" type="Node2D" parent="."]
+position = Vector2(-50, -440)
+script = preload("res://scripts/VehicleSpawner.gd")
+
+[node name="VehicleSpawner8R" type="Node2D" parent="."]
+position = Vector2(850, -440)
+script = preload("res://scripts/VehicleSpawner.gd")
+
+[node name="VehicleSpawner9L" type="Node2D" parent="."]
+position = Vector2(-50, -580)
+script = preload("res://scripts/VehicleSpawner.gd")
+
+[node name="VehicleSpawner9R" type="Node2D" parent="."]
+position = Vector2(850, -580)
+script = preload("res://scripts/VehicleSpawner.gd")
+
+[node name="VehicleSpawner10L" type="Node2D" parent="."]
+position = Vector2(-50, -720)
+script = preload("res://scripts/VehicleSpawner.gd")
+
+[node name="VehicleSpawner10R" type="Node2D" parent="."]
+position = Vector2(850, -720)
+script = preload("res://scripts/VehicleSpawner.gd")
+
+[node name="VehicleSpawner11L" type="Node2D" parent="."]
+position = Vector2(-50, -860)
+script = preload("res://scripts/VehicleSpawner.gd")
+
+[node name="VehicleSpawner11R" type="Node2D" parent="."]
+position = Vector2(850, -860)
+script = preload("res://scripts/VehicleSpawner.gd")
+
+[node name="VehicleSpawner12L" type="Node2D" parent="."]
+position = Vector2(-50, -1000)
+script = preload("res://scripts/VehicleSpawner.gd")
+
+[node name="VehicleSpawner12R" type="Node2D" parent="."]
+position = Vector2(850, -1000)
+script = preload("res://scripts/VehicleSpawner.gd")
+
+[node name="VehicleSpawner13L" type="Node2D" parent="."]
+position = Vector2(-50, -1140)
+script = preload("res://scripts/VehicleSpawner.gd")
+
+[node name="VehicleSpawner13R" type="Node2D" parent="."]
+position = Vector2(850, -1140)
+script = preload("res://scripts/VehicleSpawner.gd")
+
+[node name="VehicleSpawner14L" type="Node2D" parent="."]
+position = Vector2(-50, -1280)
+script = preload("res://scripts/VehicleSpawner.gd")
+
+[node name="VehicleSpawner14R" type="Node2D" parent="."]
+position = Vector2(850, -1280)
+script = preload("res://scripts/VehicleSpawner.gd")
+
+[node name="VehicleSpawner15L" type="Node2D" parent="."]
+position = Vector2(-50, -1420)
+script = preload("res://scripts/VehicleSpawner.gd")
+
+[node name="VehicleSpawner15R" type="Node2D" parent="."]
+position = Vector2(850, -1420)
+script = preload("res://scripts/VehicleSpawner.gd")
+
+[node name="VehicleSpawner16L" type="Node2D" parent="."]
+position = Vector2(-50, -1560)
+script = preload("res://scripts/VehicleSpawner.gd")
+
+[node name="VehicleSpawner16R" type="Node2D" parent="."]
+position = Vector2(850, -1560)
+script = preload("res://scripts/VehicleSpawner.gd")
+
+[node name="VehicleSpawner17L" type="Node2D" parent="."]
+position = Vector2(-50, -1700)
+script = preload("res://scripts/VehicleSpawner.gd")
+
+[node name="VehicleSpawner17R" type="Node2D" parent="."]
+position = Vector2(850, -1700)
 script = preload("res://scripts/VehicleSpawner.gd")
 
 [node name="Coin1" parent="." instance=ExtResource("4")]
-position = Vector2(200, 140)
+position = Vector2(600, 400)
 
 [node name="Coin2" parent="." instance=ExtResource("4")]
-position = Vector2(600, 260)
+position = Vector2(200, 120)
 
 [node name="Coin3" parent="." instance=ExtResource("4")]
-position = Vector2(300, 380)
+position = Vector2(500, -160)
 
 [node name="Coin4" parent="." instance=ExtResource("4")]
-position = Vector2(700, 500)
+position = Vector2(300, -440)
 
 [node name="Coin5" parent="." instance=ExtResource("4")]
-position = Vector2(150, 260)
+position = Vector2(650, -720)
 
 [node name="Coin6" parent="." instance=ExtResource("4")]
-position = Vector2(650, 380)
+position = Vector2(150, -1000)
+
+[node name="Coin7" parent="." instance=ExtResource("4")]
+position = Vector2(700, -1280)
+
+[node name="Coin8" parent="." instance=ExtResource("4")]
+position = Vector2(400, -1560)
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -104,7 +321,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.7)
+color = Color(0, 0, 0, 0.85)
 
 [node name="CenterContainer" type="CenterContainer" parent="UI/StartOverlay"]
 layout_mode = 1
@@ -114,40 +331,83 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/StartOverlay/CenterContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="UI/StartOverlay/CenterContainer"]
 layout_mode = 2
-theme_override_constants/separation = 20
 
-[node name="TitleLabel" type="Label" parent="UI/StartOverlay/CenterContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/StartOverlay/CenterContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/StartOverlay/CenterContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="TitleLabel" type="Label" parent="UI/StartOverlay/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.85, 0, 1)
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 56
 text = "CROSSRUNNER"
 horizontal_alignment = 1
 
-[node name="InstructionsLabel" type="Label" parent="UI/StartOverlay/CenterContainer/VBoxContainer"]
+[node name="InstructionsLabel" type="Label" parent="UI/StartOverlay/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 20
 text = "Use W/A/S/D to move
-Dodge the fast cars!
-Collect coins for points
-Reach the green goal at the top"
+
+Cross 17 roads filled with FAST traffic!
+Collect sparse coins for extra points (risky!)
+Reach the green goal zone at the top
+
+Don't get hit!"
 horizontal_alignment = 1
 
-[node name="StartButton" type="Button" parent="UI/StartOverlay/CenterContainer/VBoxContainer"]
-custom_minimum_size = Vector2(200, 50)
+[node name="StartButton" type="Button" parent="UI/StartOverlay/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(250, 60)
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 28
 text = "START GAME"
 
-[node name="CloseButton" type="Button" parent="UI/StartOverlay/CenterContainer/VBoxContainer"]
-custom_minimum_size = Vector2(200, 50)
+[node name="CloseButton" type="Button" parent="UI/StartOverlay/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(250, 60)
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 28
 text = "CLOSE"
 
-[editable path="VehicleSpawner1"]
-[editable path="VehicleSpawner2"]
-[editable path="VehicleSpawner3"]
-[editable path="VehicleSpawner4"]
+[editable path="VehicleSpawner1L"]
+[editable path="VehicleSpawner1R"]
+[editable path="VehicleSpawner2L"]
+[editable path="VehicleSpawner2R"]
+[editable path="VehicleSpawner3L"]
+[editable path="VehicleSpawner3R"]
+[editable path="VehicleSpawner4L"]
+[editable path="VehicleSpawner4R"]
+[editable path="VehicleSpawner5L"]
+[editable path="VehicleSpawner5R"]
+[editable path="VehicleSpawner6L"]
+[editable path="VehicleSpawner6R"]
+[editable path="VehicleSpawner7L"]
+[editable path="VehicleSpawner7R"]
+[editable path="VehicleSpawner8L"]
+[editable path="VehicleSpawner8R"]
+[editable path="VehicleSpawner9L"]
+[editable path="VehicleSpawner9R"]
+[editable path="VehicleSpawner10L"]
+[editable path="VehicleSpawner10R"]
+[editable path="VehicleSpawner11L"]
+[editable path="VehicleSpawner11R"]
+[editable path="VehicleSpawner12L"]
+[editable path="VehicleSpawner12R"]
+[editable path="VehicleSpawner13L"]
+[editable path="VehicleSpawner13R"]
+[editable path="VehicleSpawner14L"]
+[editable path="VehicleSpawner14R"]
+[editable path="VehicleSpawner15L"]
+[editable path="VehicleSpawner15R"]
+[editable path="VehicleSpawner16L"]
+[editable path="VehicleSpawner16R"]
+[editable path="VehicleSpawner17L"]
+[editable path="VehicleSpawner17R"]

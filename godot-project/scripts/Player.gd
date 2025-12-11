@@ -4,12 +4,12 @@ const SPEED: float = 150.0
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
+@onready var camera: Camera2D = $Camera2D
 
 var is_alive: bool = true
 
 func _ready() -> void:
-	# Visual representation
-	pass
+	camera.enabled = true
 
 func _physics_process(delta: float) -> void:
 	if not is_alive or not Global.game_started:
@@ -35,6 +35,9 @@ func _physics_process(delta: float) -> void:
 	
 	velocity = direction * SPEED
 	move_and_slide()
+	
+	# Keep player in bounds horizontally
+	position.x = clamp(position.x, 30, 770)
 
 func die() -> void:
 	if is_alive:
