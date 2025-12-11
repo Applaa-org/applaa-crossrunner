@@ -1,0 +1,61 @@
+{
+  "game": {
+    "name": "Crossrunner",
+    "type": "2D",
+    "genre": "arcade",
+    "description": "Fast-paced road crossing game where you dodge speeding vehicles and collect coins"
+  },
+  "settings": {
+    "window": {
+      "width": 800,
+      "height": 600
+    },
+    "physics": {
+      "gravity": 0
+    }
+  },
+  "player": {
+    "name": "Player",
+    "health": 1,
+    "speed": 150,
+    "abilities": ["move"]
+  },
+  "entities": {
+    "enemies": [
+      {
+        "name": "Car",
+        "health": 1,
+        "speed": 300,
+        "damage": 1,
+        "behavior": "horizontal_move"
+      },
+      {
+        "name": "Truck",
+        "health": 1,
+        "speed": 250,
+        "damage": 1,
+        "behavior": "horizontal_move"
+      }
+    ],
+    "collectibles": [
+      {
+        "name": "Coin",
+        "value": 10
+      }
+    ]
+  },
+  "levels": [
+    {
+      "name": "Main",
+      "background": "road",
+      "obstacles": ["vehicles"]
+    }
+  ],
+  "logic": {
+    "winCondition": "reach_goal",
+    "loseCondition": "hit_by_vehicle",
+    "scoring": {
+      "pointsPerCollectible": 10
+    }
+  }
+}
